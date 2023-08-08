@@ -38,7 +38,62 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    const MORSE_TABLE = {
+        '.-':     'a',
+        '-...':   'b',
+        '-.-.':   'c',
+        '-..':    'd',
+        '.':      'e',
+        '..-.':   'f',
+        '--.':    'g',
+        '....':   'h',
+        '..':     'i',
+        '.---':   'j',
+        '-.-':    'k',
+        '.-..':   'l',
+        '--':     'm',
+        '-.':     'n',
+        '---':    'o',
+        '.--.':   'p',
+        '--.-':   'q',
+        '.-.':    'r',
+        '...':    's',
+        '-':      't',
+        '..-':    'u',
+        '...-':   'v',
+        '.--':    'w',
+        '-..-':   'x',
+        '-.--':   'y',
+        '--..':   'z',
+        '.----':  '1',
+        '..---':  '2',
+        '...--':  '3',
+        '....-':  '4',
+        '.....':  '5',
+        '-....':  '6',
+        '--...':  '7',
+        '---..':  '8',
+        '----.':  '9',
+        '-----':  '0',
+    };
+    const converts = {
+        '10': '.',
+        '11': '-',
+        '00': '',
+        '**': ' '
+    }
+    let code = ''
+    return [...Array(expr.length / 10)]
+        .map((_, index) => {
+            return expr.slice(index * 10, (index + 1) * 10)
+        })
+        .reduce((word, value) => {
+            code = ''
+            for (let i = 0; i < value.length; i += 2) {
+                code = `${code}${converts[value.slice(i, i + 2)]}`
+            }
+            return word + (code.includes(' ') ? ' ' : MORSE_TABLE[code])
+        },'')
 }
 
 module.exports = {
